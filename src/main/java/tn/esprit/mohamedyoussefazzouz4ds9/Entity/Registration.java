@@ -17,7 +17,6 @@ public class Registration {
 
     private int numWeek;
 
-    // ✅ Côté propriétaire (FK ici)
     @ManyToOne
     private Course course;
 }
