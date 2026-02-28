@@ -39,6 +39,11 @@ public class Course {
             cascade = CascadeType.ALL)
     private Set<Registration> registrations;
 
+    @Override
+    public String toString() {
+        return "Course " + numCourse + " level=" + level;
+    }
+
 
 }
 
