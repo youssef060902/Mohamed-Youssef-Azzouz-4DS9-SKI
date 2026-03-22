@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.mohamedyoussefazzouz4ds9.Entity.Instructor;
 import tn.esprit.mohamedyoussefazzouz4ds9.Services.Interfaces.IInstructorService;
+import tn.esprit.mohamedyoussefazzouz4ds9.enums.Support;
 
 import java.util.List;
 
@@ -37,5 +38,22 @@ public class InstructorController {
     @DeleteMapping("/delete/{id}")
     public void deleteInstructor(@PathVariable Long id) {
         instructorService.deleteInstructor(id);
+    }
+
+    @PostMapping("/addInstructorAndAssignToCourse/{numCourse}")
+    public Instructor addInstructorAndAssignToCourse(
+            @RequestBody Instructor instructor,
+            @PathVariable Long numCourse) {
+
+        return instructorService.addInstructorAndAssignToCourse(instructor, numCourse);
+    }
+
+    @GetMapping("/numWeeksCourseOfInstructorBySupport/{numInstructor}")
+    public List<Integer> numWeeksCourseOfInstructorBySupport(
+            @PathVariable Long numInstructor,
+            @RequestParam Support support) {
+
+        return instructorService
+                .numWeeksCourseOfInstructorBySupport(numInstructor, support);
     }
 }

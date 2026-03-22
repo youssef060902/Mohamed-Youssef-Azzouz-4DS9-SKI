@@ -14,33 +14,56 @@ public class RegistrationController {
 
     private IRegistrationService registrationService;
 
-    // CREATE
     @PostMapping("/add")
     public Registration addRegistration(@RequestBody Registration registration) {
         return registrationService.addRegistration(registration);
     }
 
-    // READ ALL
     @GetMapping("/all")
     public List<Registration> getAllRegistrations() {
         return registrationService.getRegistrations();
     }
 
-    // READ BY ID
     @GetMapping("/{id}")
     public Registration getRegistration(@PathVariable Long id) {
         return registrationService.getRegistration(id);
     }
 
-    // UPDATE
     @PutMapping("/update")
     public Registration updateRegistration(@RequestBody Registration registration) {
         return registrationService.updateRegistration(registration);
     }
 
-    // DELETE
     @DeleteMapping("/delete/{id}")
     public void deleteRegistration(@PathVariable Long id) {
         registrationService.deleteRegistration(id);
     }
+
+    @PostMapping("/addRegistrationAndAssignToSkier/{numSkier}")
+    public Registration addRegistrationAndAssignToSkier(
+            @RequestBody Registration registration,
+            @PathVariable Long numSkier) {
+
+        return registrationService.addRegistrationAndAssignToSkier(registration, numSkier);
+    }
+
+    @PutMapping("/assignRegistrationToCourse/{numRegistration}/{numCourse}")
+    public Registration assignRegistrationToCourse(
+            @PathVariable Long numRegistration,
+            @PathVariable Long numCourse) {
+
+        return registrationService.assignRegistrationToCourse(numRegistration, numCourse);
+    }
+
+    @PostMapping("/addRegistrationAndAssignToSkierAndCourse/{numSkier}/{numCourse}")
+    public Registration addRegistrationAndAssignToSkierAndCourse(
+            @RequestBody Registration registration,
+            @PathVariable Long numSkier,
+            @PathVariable Long numCourse) {
+
+        return registrationService
+                .addRegistrationAndAssignToSkierAndCourse(registration, numSkier, numCourse);
+    }
+
+
 }

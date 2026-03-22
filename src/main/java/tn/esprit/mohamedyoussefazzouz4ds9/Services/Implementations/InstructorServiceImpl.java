@@ -2,18 +2,21 @@ package tn.esprit.mohamedyoussefazzouz4ds9.Services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.mohamedyoussefazzouz4ds9.Entity.Course;
 import tn.esprit.mohamedyoussefazzouz4ds9.Entity.Instructor;
+import tn.esprit.mohamedyoussefazzouz4ds9.Repositories.CourseRepo;
 import tn.esprit.mohamedyoussefazzouz4ds9.Repositories.InstructorRepo;
 import tn.esprit.mohamedyoussefazzouz4ds9.Services.Interfaces.IInstructorService;
+import tn.esprit.mohamedyoussefazzouz4ds9.enums.Support;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
 public class InstructorServiceImpl implements IInstructorService {
 
     private InstructorRepo instructorRepo;
+    private CourseRepo courseRepo;
 
     @Override
     public Instructor addInstructor(Instructor instructor) {
@@ -45,5 +48,51 @@ public class InstructorServiceImpl implements IInstructorService {
     @Override
     public List<Instructor> getInstructors() {
         return instructorRepo.findAll();
+    }
+
+    @Override
+    public Instructor addInstructorAndAssignToCourse(Instructor instructor, Long numCourse) {
+
+        Course course = courseRepo.findById(numCourse).get();
+
+        Instructor savedInstructor = instructorRepo.save(instructor);
+
+        Set<Course> courses = new HashSet<>();
+
+        if(savedInstructor.getCourses() != null){
+            courses = savedInstructor.getCourses();
+        }
+
+        courses.add(course);
+
+        savedInstructor.setCourses(courses);
+
+        instructorRepo.save(savedInstructor);
+
+        return savedInstructor;
+}
+
+    @Override
+    public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
+
+        Instructor instructor = instructorRepo.findById(numInstructor).get();
+
+        List<Integer> weeks = new ArrayList<>();
+
+        instructor.getCourses().forEach(course -> {
+
+            if(course.getSupport().equals(support)) {
+
+                course.getRegistrations().forEach(registration -> {
+
+                    weeks.add(registration.getNumWeek());
+
+                });
+
+            }
+
+        });
+
+        return weeks;
     }
 }

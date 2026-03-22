@@ -16,7 +16,11 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numSub;
-
+    private LocalDate startDate;
+    private LocalDate endDate;
+    @Enumerated(EnumType.STRING)
+    private TypeSubscription typeSub;
+    private Float price;
 
     @OneToOne(mappedBy = "subscription")
     private Skier skier;

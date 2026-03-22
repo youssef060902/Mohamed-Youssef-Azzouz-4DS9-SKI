@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.esprit.mohamedyoussefazzouz4ds9.enums.Color;
 
 import java.util.Set;
 
@@ -20,6 +21,11 @@ public class Piste {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numPiste;
+    private String namePiste;
+    private int length;
+    private int slope;
+    @Enumerated(EnumType.STRING)
+    private Color color;
 
 
 

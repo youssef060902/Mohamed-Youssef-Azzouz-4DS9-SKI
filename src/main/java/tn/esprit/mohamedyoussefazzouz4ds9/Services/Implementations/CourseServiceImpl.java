@@ -13,7 +13,6 @@ public class CourseServiceImpl implements ICourseService {
 
     private final CourseRepo courseRepo;
 
-    // 🔥 Constructeur manuel (solution 100% fiable)
     public CourseServiceImpl(CourseRepo courseRepo) {
         this.courseRepo = courseRepo;
     }
