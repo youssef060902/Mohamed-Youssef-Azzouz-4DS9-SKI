@@ -12,10 +12,11 @@ public class CourseController {
 
     private final ICourseService courseService;
 
-    // 🔥 Injection par constructeur (100% fiable)
     public CourseController(ICourseService courseService) {
         this.courseService = courseService;
     }
+
+
 
     @PostMapping("/add")
     public Course addCourse(@RequestBody Course course){

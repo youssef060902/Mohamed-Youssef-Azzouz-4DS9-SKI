@@ -20,4 +20,7 @@ public interface IInstructorService {
     Instructor addInstructorAndAssignToCourse(Instructor instructor, Long numCourse);
 
     List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support);
+
+    Instructor addInstructorAndAssignToCourses(Instructor instructor, List<Long> numCourse);
+
 }

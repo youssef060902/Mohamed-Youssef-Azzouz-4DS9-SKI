@@ -22,4 +22,10 @@ public interface ISubscriptionService {
     Set<Subscription> getSubscriptionByType(TypeSubscription type);
 
     List<Subscription> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate);
+
+    public void retrieveSubscriptions();
+    public void showMonthlyRecurringRevenue();
+
+
+
 }

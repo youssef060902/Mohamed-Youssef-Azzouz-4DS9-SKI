@@ -37,7 +37,6 @@ public class Course implements Serializable {
     @JsonIgnore
     private Set<Registration> registrations;
 
-
     @Override
     public String toString() {
         return "Course " + numCourse + " level=" + level;

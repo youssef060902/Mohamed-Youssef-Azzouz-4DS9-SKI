@@ -1,5 +1,6 @@
 package tn.esprit.mohamedyoussefazzouz4ds9.Services.Interfaces;
 
+import tn.esprit.mohamedyoussefazzouz4ds9.Entity.Instructor;
 import tn.esprit.mohamedyoussefazzouz4ds9.Entity.Registration;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface IRegistrationService {
 
     Registration addRegistrationAndAssignToSkierAndCourse(
             Registration registration, Long numSkier, Long numCourse);
+
 }

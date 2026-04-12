@@ -52,11 +52,9 @@ public class RegistrationServiceImpl implements IRegistrationService {
     @Override
     public Registration addRegistrationAndAssignToSkier(Registration registration, Long numSkieur) {
 
-        Skier skier = skierRepo.findById(numSkieur).orElse(null);
+        Skier skier = skierRepo.findById(numSkieur).get();
 
         Registration reg = registrationRepo.save(registration);
-
-        skier.getRegistrations().add(reg);
 
         reg.setSkier(skier);
 

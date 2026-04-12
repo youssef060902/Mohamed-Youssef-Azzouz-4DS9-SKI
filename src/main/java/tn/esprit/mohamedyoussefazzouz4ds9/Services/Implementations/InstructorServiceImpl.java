@@ -1,4 +1,4 @@
-package tn.esprit.mohamedyoussefazzouz4ds9.Services;
+package tn.esprit.mohamedyoussefazzouz4ds9.Services.Implementations;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -54,23 +54,25 @@ public class InstructorServiceImpl implements IInstructorService {
     public Instructor addInstructorAndAssignToCourse(Instructor instructor, Long numCourse) {
 
         Course course = courseRepo.findById(numCourse).get();
-
-        Instructor savedInstructor = instructorRepo.save(instructor);
-
-        Set<Course> courses = new HashSet<>();
-
-        if(savedInstructor.getCourses() != null){
-            courses = savedInstructor.getCourses();
-        }
-
-        courses.add(course);
-
-        savedInstructor.setCourses(courses);
-
-        instructorRepo.save(savedInstructor);
-
-        return savedInstructor;
+        instructor.getCourses().add(course);
+        return instructorRepo.save(instructor);
 }
+    @Override
+     public Instructor addInstructorAndAssignToCourses(Instructor instructor, List<Long> numCourse) {
+
+        List<Course> courses = courseRepo.findAllById(numCourse);
+
+        for (Course course : courses) {
+            instructor.getCourses().add(course);
+        }
+        Set<Course> courseSet = new HashSet<>();
+        for( Course course : courses){
+            courseSet.add(course);
+        }
+        instructor.setCourses(courseSet);
+
+        return instructorRepo.save(instructor);
+    }
 
     @Override
     public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
